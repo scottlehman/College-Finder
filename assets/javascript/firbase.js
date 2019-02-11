@@ -21,6 +21,7 @@ $("#add-college-btn").on("click", function(event) {
     var newPGIncome = $("#PGIncome").val().trim();
     var newTuition = $("#tuition").val().trim();
     var newRate = $("#graduation-rate").val().trim();
+
     var newLiving = $("#livingCost").val().trim();    
     var newJobs = $("#jobs").val().trim();
     
@@ -28,6 +29,7 @@ $("#add-college-btn").on("click", function(event) {
     // new train objecct
 
     var newCollegeinfo = {
+
         college: newCollege,
         city: newCity,
         degree: newDegree,
@@ -42,6 +44,7 @@ $("#add-college-btn").on("click", function(event) {
     database.ref().push(newCollegeinfo);
 
 
+
     // clear inputs
     $("#College-name").val("");
     $("#city").val("");
@@ -49,6 +52,7 @@ $("#add-college-btn").on("click", function(event) {
     $("#PGIncome").val("");    
     $("#tuition").val("");
     $("#graduation-rate").val("");
+
     $("#livingCost").val("");
     $("#jobs").val("");
 
@@ -69,6 +73,7 @@ database.ref().on("child_added", function(childSnapshot) {
 
     // new row for train
     var savedCollege= $("<tr>").append(
+
         $("<td>").text(newCollege),
         $("<td>").text(newCity),
         $("<td>").text(newDegree),
