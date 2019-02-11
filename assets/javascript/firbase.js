@@ -20,14 +20,14 @@ $("#add-college-btn").on("click", function(event) {
     var newDegree = $("#degree").val().trim();
     var newPGIncome = $("#PGIncome").val().trim();
     var newTuition = $("#tuition").val().trim();
-    var newRate = $("#gradutation-Rate").val().trim();
+    var newRate = $("#graduation-rate").val().trim();
     var newLiving = $("#livingCost").val().trim();    
     var newJobs = $("#jobs").val().trim();
     
     
     // new train objecct
 
-    var newCollege = {
+    var newCollegeinfo = {
         college: newCollege,
         city: newCity,
         degree: newDegree,
@@ -39,7 +39,7 @@ $("#add-college-btn").on("click", function(event) {
     };
 
     // push's new info to database
-    database.ref().push(newTrain);
+    database.ref().push(newCollegeinfo);
 
 
     // clear inputs
@@ -48,7 +48,7 @@ $("#add-college-btn").on("click", function(event) {
     $("#degree").val("");
     $("#PGIncome").val("");    
     $("#tuition").val("");
-    $("#graduation-Rate").val("");
+    $("#graduation-rate").val("");
     $("#livingCost").val("");
     $("#jobs").val("");
 
@@ -68,7 +68,7 @@ database.ref().on("child_added", function(childSnapshot) {
 
 
     // new row for train
-    var newCollegeINFO = $("<tr>").append(
+    var savedCollege= $("<tr>").append(
         $("<td>").text(newCollege),
         $("<td>").text(newCity),
         $("<td>").text(newDegree),
@@ -79,6 +79,6 @@ database.ref().on("child_added", function(childSnapshot) {
         $("<td>").text(newJobs)
     );
 
-    $("#collegeInfo-table > tbody").append(newcollegeINFO);
+    $("#collegeInfo-table > tbody").append(savedCollege);
 
 });
