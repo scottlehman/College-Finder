@@ -1,0 +1,75 @@
+body {
+    background-image: url("..//css/pexels-photo-267885.jpeg");
+    background-attachment: fixed;
+    background-size: 100%;
+    background-position: center;
+}
+/* Sumbit buttons */
+.btn-primary {
+font-weight: bold;
+background-color: blue;
+width: 100%;
+}
+/* "Look up a college or univiersity you're interested in:" */
+h5 {
+    font-size: 25px;
+    text-align: center;
+    font-family: 'Staatliches', cursive;
+}
+p {
+    font-family: Arial, Helvetica, sans-serif;
+}
+h2 {
+    text-align: center;
+    font-family: 'Staatliches', cursive;
+}
+h1 {
+    font-family: 'Staatliches', cursive;
+}
+ 
+/*jumbotron*/
+.jumbotron  {
+    text-align: center;
+    opacity: .85;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+.card-title {
+    padding-top: 10px;
+    text-align: center;
+}
+#style {
+    padding: 15px;
+}
+.card-body {
+    float: left;
+    padding: 15px, 15px, 15px, 15px;
+}
+/* Nav bar size */
+.navbar {
+height: 20px;
+padding-bottom: 10px;
+}
+.card {
+    opacity: .93;
+    height: auto;
+}
+/* added borders to the cards */
+#style {
+    box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 black;
+}
+footer {
+    text-align: center;
+    background-color: white;
+    color: black;
+    border-top: 8px solid blue;
+    font-size: 12px;
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: .70;
+}

@@ -14,7 +14,7 @@ var database = firebase.database();
 $("#add-college-btn").on("click", function(event) {
     event.preventDefault();
 
-    // pulls user input/new train info
+    // pulls user input/new college info
     var newCollege = $("#College-name").val().trim();
     var newCity = $("#city").val().trim();
     var newDegree = $("#degree").val().trim();
@@ -26,7 +26,7 @@ $("#add-college-btn").on("click", function(event) {
     var newJobs = $("#jobs").val().trim();
     
     
-    // new train objecct
+    // new college objecct
 
     var newCollegeinfo = {
 
@@ -71,7 +71,7 @@ database.ref().on("child_added", function(childSnapshot) {
     var newJobs = childSnapshot.val().jobs;
 
 
-    // new row for train
+    // new row for college
     var savedCollege= $("<tr>").append(
 
         $("<td>").text(newCollege),
