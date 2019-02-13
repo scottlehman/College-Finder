@@ -4,7 +4,6 @@ body {
     background-size: 100%;
     background-position: center;
 }
-
 /* Sumbit buttons */
 .btn-primary {
 font-weight: bold;
@@ -12,22 +11,13 @@ background-color: blue;
 width: 100%;
 }
 
-/* "Look up a college or univiersity you're interested in:" */
-h5 {
-    font-size: 25px;
-    text-align: center;
-    font-family: 'Staatliches', cursive;
-}
-
 p {
     font-family: Arial, Helvetica, sans-serif;
 }
-
 h2 {
     text-align: center;
     font-family: 'Staatliches', cursive;
 }
-
 h1 {
     font-family: 'Staatliches', cursive;
 }
@@ -46,16 +36,13 @@ h1 {
     padding-top: 10px;
     text-align: center;
 }
-
 #style {
     padding: 15px;
 }
-
 .card-body {
     float: left;
     padding: 15px, 15px, 15px, 15px;
 }
-
 /* Nav bar size */
 .navbar {
 height: 20px;
