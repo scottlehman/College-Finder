@@ -4,65 +4,84 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>College Finder</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
         crossorigin="anonymous">
-    <script src="main.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet">
+    <!-- <script src="main.js"></script> -->
 </head>
 
 <body>
     <div class="jumbotron jumbotron-fluid">
-        <div class="container">
             <h1 class="display-4">College Background Check</h1>
             <p class="lead">Search into the specifics of the college of your choice</p>
+            <nav class="navbar navbar-expand-sm navbar-dark">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                      <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Saved Colleges</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Pricing</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </nav>
         </div>
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-4" >
-                <div class="card" style="width: 18rem;">
+            <div class="col-lg-3">
+                <div class="card" id="style">
+                    <h5 class="card-title">Saved Colleges</h5>
+                    <img class="card-img-top" src="assets/css/apps-attractive-beautiful-1462631.jpg" alt="CollegeFinder">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
+                        <p class="card-text">Follow the links below to access your saved colleges.</p>
                         <a href="#" class="card-link">Card link</a>
                         <a href="#" class="card-link">Another link</a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8">
-                <div class="card" style="width: 48rem;">
-                    <div class="card-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Enter School Name</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-                                    <div class="form-group">
-                                            <label for="exampleFormControlSelect1">Select Category</label>
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                              <option>Cost of Attendance</option>
-                                              <option>Admission</option>
-                                              <option>After Graduation Earnings</option>
-                                              <option>Degrees</option>
-                                              <option>Local Economy</option>
-                                            </select>
-                                          </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+             <br>
+            <div class="col-lg-9">
+                <div class="card" id="style">
+                    <form>
+                        <div class="form-group">
+                            <h2><b>Find Your Future School</b></h2>
+                            <h5>Look up a college or univiersity you're interested in:</h5>
+                            <label for="exampleInputEmail1">Enter School Name</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                placeholder="">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Select Category</label>
+                                <select class="form-control" id="exampleFormControlSelect1">
+                                    <option>Cost of Attendance</option>
+                                    <option>Admission</option>
+                                    <option>After Graduation Earnings</option>
+                                    <option>Degrees</option>
+                                    <option>Local Economy</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <br>
-                    <div class="card" style="width: 48rem;">
-                    <p>filler text</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur at, similique sit excepturi ut, iste facere quibusdam deleniti culpa quas? Deleniti atque similique veniam? Accusamus officia ad laboriosam esse?</p>
-                    </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
+    
+<footer class="page-footer font-small blue">
+    <div class="footer-copyright text-center py-3">© 2019 Copyright: Cobra Coders
+    </div>
+  </footer>
 </body>
 
 </html>
