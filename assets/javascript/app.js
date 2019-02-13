@@ -23,4 +23,4 @@ $("#submit-search").on("click", function(){
 
     console.log("button works");
 
-})
+});
