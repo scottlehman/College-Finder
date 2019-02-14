@@ -8,12 +8,20 @@ $("#submit-search").on("click", function(){
     var lat = "";
     var long = 0;
     var county = "";
+
+
+
+
+
     var collegeScoreCardSchoolName = `schools?school.name=${collegeNameInput}`;
     $.ajax({
         url: `https://api.data.gov/ed/collegescorecard/v1/${collegeScoreCardSchoolName}${collegeScoreCardApiKey}`,
             method: "GET"
           }).then(function(response) {
+
               
+
+              showResults(response)
             $("#collegeName").html(`<h1>${response.results[0].school.name}</h1>`);
             $("#location").html(`<b>Location:</b> ${response.results[0].school.city}, ${response.results[0].school.state}`)
             $("#tuitionInstate").html(`<b>In state cost:</b> $${response.results[0].latest.cost.tuition.in_state}`);
@@ -21,6 +29,7 @@ $("#submit-search").on("click", function(){
             $("#acceptanceRate").html(`<b>Acceptance Rate:</b> ${response.results[0].latest.admissions.admission_rate.overall}%`);
             // $("#SixYearIncome").html(`<b>Median income after six years: </b>$${respsone.results[0].latest.earnings..median}`)
             console.log(response);
+
             console.log(`${response.results[0].school.city}`)
           });
 
@@ -105,27 +114,3 @@ $("#add-college-btn").on("click", function(event) {
 });
 
 
-database.ref().on("child_added", function(childSnapshot) {
-
-  var newCollege = childSnapshot.val().college;
-  var newCity = childSnapshot.val().city;
-  var newtuition_Instate = childSnapshot.val().tuition_Instate;
-  var newtuition_Outstate = childSnapshot.val().tuition_Outstate;
-  var newacceptRate = childSnapshot.val().acceptRate;
-  // var newIncome = childSnapshot.val().income;ß
-
-  // new row for college
-  var savedCollege= $("<tr>").append(
-
-      $("<td>").text(newCollege),
-      $("<td>").text(newCity),
-      $("<td>").text(newtuition_Instate),
-      $("<td>").text(newtuition_Outstate),        
-      $("<td>").text(newacceptRate),
-      // $("<td>").text(newIncome),
-
-  );
-
-  $("#collegeInfo-table > tbody").append(savedCollege);
-
-});
