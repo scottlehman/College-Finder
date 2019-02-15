@@ -6,12 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>College Finder</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-        crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Staatliches" rel="stylesheet">
-
+    
     <!-- Firebase Reference -->
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
 
@@ -23,26 +22,25 @@
 <body>
     <div class="jumbotron jumbotron-fluid">
         <br>
-        <h1 class="display-4">College Finder</h1>
-        <p class="lead">Search into the specifics of the college of your choice.</p>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-black">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarText" aria-controls="navbarText"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
+            <h1 class="display-4">College Finder</h1>
+            <p class="lead">Search into the specifics of the college of your choice.</p>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                  <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Search <span class="sr-only">(current)</span></a>
+                      <a class="nav-link" href="index.html">Search <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="favorites.html">Saved Colleges</a>
+                      <a class="nav-link" href="favorites.html">Saved Colleges</a>
                     </li>
-                </ul>
-            </div>
-        </nav>
+                  </ul>
+                </div>
+              </nav>
 
-    </div>
+        </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -50,11 +48,11 @@
                     <h5 class="card-title">Saved Colleges</h5>
                     <img class="card-img-top" src="assets/css/apps-attractive-beautiful-1462631.jpg" alt="CollegeFinder">
                     <div class="card-body">
-
+                        
                     </div>
                 </div>
             </div>
-            <br>
+             <br>
             <div class="col-lg-9">
                 <div class="card" id="style">
                     <form>
@@ -70,20 +68,20 @@
                 <div class="card" id="style">
                     <p id="collegeName"></p>
                     <p id="location"></p>
-                    <p id="tuitionInstate"></p>
+                    <p id="tuitionInstate"></p>  
                     <p id="tuitionOutstate"></p>
                     <p id="acceptanceRate"></p>
                     <p id="population"></p>
                     <p id="housing"></p>
                     <p id="jobs"></p>
                     <form action="">
-                        <button type="submit" id="submit-search" class="btn btn-primary">Save</button>
+                    <button type="submit" id="submit-search" class="btn btn-primary">Save</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
+    
     <br>
     <br>
     <br>
@@ -94,8 +92,7 @@
 </body>
 <footer class="footer font-small blue">
     <div class="container">
-        <p class="footer-copyright text-center py-3">© 2019 Copyright: Cobra Coders</p>
+    <p class= "footer-copyright text-center py-3">© 2019 Copyright: Cobra Coders</p>
     </div>
-</footer>
-
+  </footer>
 </html>
