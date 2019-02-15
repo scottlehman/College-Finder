@@ -31,11 +31,13 @@ $("#submit-search").on("click", function(collegeINFO){
           
           // Saves search variables for firebase to capture when save button is clicked
           
-          newCollege = `${response.results[0].school.name}`
-          newCity = `${response.results[0].school.city}`
-          newtuition_Instate = `${response.results[0].latest.cost.tuition.in_state}`
-          newtuition_Outstate = `${response.results[0].latest.cost.tuition.out_of_state}`
-          newacceptRate  = `${response.results[0].latest.admissions.admission_rate.overall}`
+          var newCollege = `${response.results[0].school.name}`
+          var newCity = `${response.results[0].school.city}`
+          var newtuition_Instate = `${response.results[0].latest.cost.tuition.in_state}`
+          var newtuition_Outstate = `${response.results[0].latest.cost.tuition.out_of_state}`
+          var newacceptRate  = `${response.results[0].latest.admissions.admission_rate.overall}`
+          var newPrograms = `${response.results[0].latest.academics.program.bachelors[i]}`
+          console.log(newPrograms);
           console.log(newCity);
           newstate = `${response.results[0].school.state}`
           var lat = response.results[0].location.lat
