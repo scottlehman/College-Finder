@@ -1,3 +1,7 @@
+$(document).ready(function() {
+    $("#cardResult").hide();
+});
+
 var collegeScoreCardApiKey = "&api_key=h9FV3Fo58pfjzQYWYFNBjwf8imebCZj2t18pebBA";
 var collegeNameInput = "";
 var collegeScoreCardURL = "https://api.data.gov/ed/collegescorecard/v1/";
@@ -11,39 +15,39 @@ $("#submit-search").on("click", function(collegeINFO){
     // var lat = "";
     // var long = "";
     // var county = "";
-
-  var collegeScoreCardSchoolName = `schools?school.name=${collegeNameInput}`;
-
-  function initialAPICall() {
-    return new Promise((resolve, reject) => {
-
-      $.ajax({
-        url: `https://api.data.gov/ed/collegescorecard/v1/${collegeScoreCardSchoolName}${collegeScoreCardApiKey}`,
-            method: "GET"
-          }).then(function(response) {
-              // showResults(response)
-              // $("#SixYearIncome").html(`<b>Median income after six years: </b>$${respsone.results[0].latest.earnings..median}`)
-              console.log(response);
-              
-              // Saves search variables for firebase to capture when save button is clicked
-              
-              newCollege = `${response.results[0].school.name}`
-              newCity = `${response.results[0].school.city}`
-              newtuition_Instate = `${response.results[0].latest.cost.tuition.in_state}`
-              newtuition_Outstate = `${response.results[0].latest.cost.tuition.out_of_state}`
-              newacceptRate  = `${response.results[0].latest.admissions.admission_rate.overall}`
-              console.log(newCity);
-              newstate = `${response.results[0].school.state}`
-              var lat = response.results[0].location.lat
-              var long =  response.results[0].location.lon
-              console.log(long);
-
-              return resolve({ lat, long, newCollege, newCity, newtuition_Instate, newtuition_Outstate, newacceptRate, newstate });
-
-          });
+    
+    var collegeScoreCardSchoolName = `schools?school.name=${collegeNameInput}`;
+    
+    function initialAPICall() {
+      return new Promise((resolve, reject) => {
+        
+        $.ajax({
+          url: `https://api.data.gov/ed/collegescorecard/v1/${collegeScoreCardSchoolName}${collegeScoreCardApiKey}`,
+          method: "GET"
+        }).then(function(response) {
+          // showResults(response)
+          // $("#SixYearIncome").html(`<b>Median income after six years: </b>$${respsone.results[0].latest.earnings..median}`)
+          console.log(response);
+          
+          // Saves search variables for firebase to capture when save button is clicked
+          
+          newCollege = `${response.results[0].school.name}`
+          newCity = `${response.results[0].school.city}`
+          newtuition_Instate = `${response.results[0].latest.cost.tuition.in_state}`
+          newtuition_Outstate = `${response.results[0].latest.cost.tuition.out_of_state}`
+          newacceptRate  = `${response.results[0].latest.admissions.admission_rate.overall}`
+          console.log(newCity);
+          newstate = `${response.results[0].school.state}`
+          var lat = response.results[0].location.lat
+          var long =  response.results[0].location.lon
+          console.log(long);
+          
+          return resolve({ lat, long, newCollege, newCity, newtuition_Instate, newtuition_Outstate, newacceptRate, newstate });
+          
+        });
       });
     }
-
+    
     function callCensusForPopulationAndJobs(data) {
       return new Promise((resolve, reject) => {
         $.ajax({
@@ -53,15 +57,15 @@ $("#submit-search").on("click", function(collegeINFO){
           console.log(response)
           var newPOP= `${response[1][0]}`
           var newJobs = `${parseInt(response[1][0]) + parseInt(response[2][0]) + parseInt(response[3][0])}`
-
+          
           data.newPOP = newPOP;
           data.newJobs = newJobs;
           return resolve(data);
         });
       });
     }
-              
-
+    
+    
     function callCensusForHousing (data) {
       return new Promise((resolve, reject) => {
         $.ajax({
@@ -86,33 +90,34 @@ $("#submit-search").on("click", function(collegeINFO){
           var state = response[273] + response[274]
           var county = response[287] + response[288] + response[289]
           console.log(response);
-
+          
           data.state = state;
           data.county = county;
           return resolve(data);
         });
       });
     }
-
+    
     initialAPICall()
-      .then((data) => callLOC(data))
-      .then((data) => callCensusForPopulationAndJobs(data))
-      .then((data) => callCensusForHousing(data))
-      .then((data) => {
-        console.log('Manipulate the DOM here...');
-        console.log(data)
-        $("#collegeName").html(`<h1>${data.newCollege}</h1>`);
-        $("#location").html("<b>Location: </b>" + data.newCity +", "+ data.newstate)
-        $("#tuitionInstate").html("<b>In state cost: $</b>" + data.newtuition_Instate);
-        $("#tuitionOutstate").html("<b>Out of state cost: $</b>" + data.newtuition_Outstate);
-        $("#acceptanceRate").html("<b>Acceptance Rate: </b>" + data.newacceptRate + "%");
-        $("#population").html("<b>Population: </b>" + data.newPOP);
-        $("#jobs").html("<b>Total Jobs in Area: </b>" + data.newJobs);
-        $("#housing").html("<b>Housing: </b>" + data.newHousing);
-        showResults(data);
-
-      })
-      .catch(error => console.error(error));
+    .then((data) => callLOC(data))
+    .then((data) => callCensusForPopulationAndJobs(data))
+    .then((data) => callCensusForHousing(data))
+    .then((data) => {
+      console.log('Manipulate the DOM here...');
+      console.log(data)
+      $("#collegeName").html(`<h1>${data.newCollege}</h1>`);
+      $("#location").html("<b>Location: </b>" + data.newCity +", "+ data.newstate)
+      $("#tuitionInstate").html("<b>In state cost: $</b>" + data.newtuition_Instate);
+      $("#tuitionOutstate").html("<b>Out of state cost: $</b>" + data.newtuition_Outstate);
+      $("#acceptanceRate").html("<b>Acceptance Rate: </b>" + data.newacceptRate + "%");
+      $("#population").html("<b>Population: </b>" + data.newPOP);
+      $("#jobs").html("<b>Total Jobs in Area: </b>" + data.newJobs);
+      $("#housing").html("<b>Housing: </b>" + data.newHousing);
+      showResults(data);
+      $("#cardResult").show();
+      
+    })
+    .catch(error => console.error(error));
     
     // JS for linking info to firebase
       var config = {
