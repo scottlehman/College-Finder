@@ -108,7 +108,7 @@ $("#submit-search").on("click", function(collegeINFO){
       console.log('Manipulate the DOM here...');
       console.log(data)
       $("#collegeName").html(`<h1>${data.newCollege}</h1>`);
-      $("#collegeUrl").html(`<a href="${data.lowerCaseURL}">${data.lowerCaseURL}</a>`)
+      $("#collegeUrl").html(`<a href="${data.lowerCaseURL}" target="_blank">${data.lowerCaseURL}</a>`)
       $("#location").html("<b>Location: </b>" + data.newCity +", "+ data.newstate);
       $("#tuitionInstate").html("<b>In state cost: $</b>" + data.newtuition_Instate);
       $("#tuitionOutstate").html("<b>Out of state cost: $</b>" + data.newtuition_Outstate);
