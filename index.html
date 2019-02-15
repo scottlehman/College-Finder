@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Staatliches" rel="stylesheet">
     
     <!-- Firebase Reference -->
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
@@ -20,13 +21,26 @@
 
 <body>
     <div class="jumbotron jumbotron-fluid">
-            <h1 class="display-4">College Background Check</h1>
-            <p class="lead">Search into the specifics of the college of your choice</p>
-            <li><a href="index.html">Seach</a></li>
-            <li><a href="favorites.html">Saved Colleges</a></li>
 
+        <br>
+            <h1 class="display-4">College Finder</h1>
+            <p class="lead">Search into the specifics of the college of your choice.</p>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="index.html">Search <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="favorites.html">Saved Colleges</a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
         </div>
-    </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -50,7 +64,9 @@
                     </form>
                 </div>
                 <br>
-                <div class="card" id="cardResult" style="width: 48rem;">
+
+                <div class="card" id="style">
+
                     <p id="collegeName"></p>
                     <p id="collegeUrl"></p>
                     <p id="location"></p>
@@ -60,18 +76,27 @@
                     <p id="population"></p>
                     <p id="housing"></p>
                     <p id="jobs"></p>
-                    <button class="btn btn-primary float-right" id="add-college-btn">Save</button>
+
+                    <form action="">
+                    <button type="submit" id="submit-search" class="btn btn-primary">Save</button>
+                    </form>
+
                 </div>
             </div>
         </div>
     </div>
     
-<footer class="page-footer font-small blue">
-    <div class="footer-copyright text-center py-3">© 2019 Copyright: Cobra Coders
-    </div>
-  </footer>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <script src="assets/javascript/app.js"></script>
 
 </body>
-
+<footer class="footer font-small blue">
+    <div class="container">
+    <p class= "footer-copyright text-center py-3">© 2019 Copyright: Cobra Coders</p>
+    </div>
+  </footer>
 </html>
