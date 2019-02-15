@@ -31,16 +31,16 @@ $("#submit-search").on("click", function(collegeINFO){
           
           // Saves search variables for firebase to capture when save button is clicked
           
-          newCollege = `${response.results[0].school.name}`
-          newCity = `${response.results[0].school.city}`
-          newtuition_Instate = `${response.results[0].latest.cost.tuition.in_state}`
-          newtuition_Outstate = `${response.results[0].latest.cost.tuition.out_of_state}`
-          newacceptRate  = `${response.results[0].latest.admissions.admission_rate.overall}`
+          newCollege = response.results[0].school.name;
+          newCity = response.results[0].school.city;
+          newtuition_Instate = response.results[0].latest.cost.tuition.in_state;
+          newtuition_Outstate = response.results[0].latest.cost.tuition.out_of_state;
+          newacceptRate  = response.results[0].latest.admissions.admission_rate.overall;
           console.log(newCity);
-          newstate = `${response.results[0].school.state}`
-          var lat = response.results[0].location.lat
-          var long =  response.results[0].location.lon
-          collegeURL = `${response.results[0].school.school_url}`;
+          newstate = response.results[0].school.state;
+          var lat = response.results[0].location.lat;
+          var long =  response.results[0].location.lon;
+          collegeURL = response.results[0].school.school_url;
           lowerCaseURL = collegeURL.toLowerCase();
           console.log(long);
           
@@ -57,7 +57,7 @@ $("#submit-search").on("click", function(collegeINFO){
           method: "GET"
         }).then(function (response) {
           console.log(response)
-          var newPOP= `${response[1][0]}`
+          var newPOP= response[1][0];
           var newJobs = `${parseInt(response[1][0]) + parseInt(response[2][0]) + parseInt(response[3][0])}`
           
           data.newPOP = newPOP;
@@ -75,7 +75,7 @@ $("#submit-search").on("click", function(collegeINFO){
           method: "GET"
         }).then(function (response) {
           console.log(response)
-          var newHousing = `${response[1][2]}`
+          var newHousing = response[1][2];
           data.newHousing = newHousing;
           return resolve(data);
           // $("#housing").html(`<b>Housing: </b> ${response[1][2]}`);
@@ -89,8 +89,8 @@ $("#submit-search").on("click", function(collegeINFO){
           url: 'https://tigerweb.geo.census.gov/ArcGIS/rest/services/Census2010/State_County/MapServer/1/query?text=&geometry={%22x%22:'+ data.long + ',%22y%22:'+ data.lat +',%22spatialReference%22:{%22wkid%22:4326}}&geometryType=esriGeometryPoint&spatialRel=esriSpatialRelIntersects&returnGeometry=false&outFields=STATE,COUNTY&f=json',
           method: "GET"    
         }).then(function(response) {
-          var state = response[273] + response[274]
-          var county = response[287] + response[288] + response[289]
+          var state = response[273] + response[274];
+          var county = response[287] + response[288] + response[289];
           console.log(response);
           
           data.state = state;
@@ -140,7 +140,7 @@ $("#submit-search").on("click", function(collegeINFO){
       // Button that pushes var for firebase
 
       function showResults(data) {
-        $("#add-college-btn").on("click", function(event) {
+        $("#save-search").on("click", function(event) {
             event.preventDefault();
             console.log(newCity);
 
