@@ -1,3 +1,7 @@
+$(document).ready(function() {
+    $("#cardResult").hide();
+});
+
 var collegeScoreCardApiKey = "&api_key=h9FV3Fo58pfjzQYWYFNBjwf8imebCZj2t18pebBA";
 var collegeNameInput = "";
 var collegeScoreCardURL = "https://api.data.gov/ed/collegescorecard/v1/";
@@ -17,6 +21,7 @@ $.ajax({
     url: `https://api.data.gov/ed/collegescorecard/v1/${collegeScoreCardSchoolName}${collegeScoreCardApiKey}`,
         method: "GET"
       }).then(function(response) {
+          $("#cardResult").show();
           showResults(response)
           // $("#SixYearIncome").html(`<b>Median income after six years: </b>$${respsone.results[0].latest.earnings..median}`)
           console.log(response);
@@ -32,11 +37,13 @@ $.ajax({
           newstate = `${response.results[0].school.state}`
           lat = response.results[0].location.lat
           long =  response.results[0].location.lon
-
+          collegeURL = `${response.results[0].school.school_url}`;
+          lowerCaseURL = collegeURL.toLowerCase();
 
           console.log(long);
           console.log(lat);
           $("#collegeName").html(`<h1>${response.results[0].school.name}</h1>`);
+          $("#collegeUrl").html(`<a href="${lowerCaseURL}" target="_blank">${lowerCaseURL}</a>`);
           $("#location").html("<b>Location: </b>" + newCity +", "+ newstate)
           $("#tuitionInstate").html("<b>In state cost: $</b>" + newtuition_Instate);
           $("#tuitionOutstate").html("<b>Out of state cost: $</b>" + newtuition_Outstate);
