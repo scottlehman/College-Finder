@@ -1,92 +1,166 @@
+$(document).ready(function() {
+    $("#cardResult").hide();
+});
+
 var collegeScoreCardApiKey = "&api_key=h9FV3Fo58pfjzQYWYFNBjwf8imebCZj2t18pebBA";
 var collegeNameInput = "";
 var collegeScoreCardURL = "https://api.data.gov/ed/collegescorecard/v1/";
+    // var lat = "";
+    // var long = "";
+    // var county = "";
 
-$("#submit-search").on("click", function(){
+$("#submit-search").on("click", function(collegeINFO){
     event.preventDefault();
     collegeNameInput = $("#college-name-input").val().trim();
-
+    // var lat = "";
+    // var long = "";
+    // var county = "";
+    
     var collegeScoreCardSchoolName = `schools?school.name=${collegeNameInput}`;
-    $.ajax({
-        url: `https://api.data.gov/ed/collegescorecard/v1/${collegeScoreCardSchoolName}${collegeScoreCardApiKey}`,
-            method: "GET"
-          }).then(function(response) {
+    
+    function initialAPICall() {
+      return new Promise((resolve, reject) => {
+        
+        $.ajax({
+          url: `https://api.data.gov/ed/collegescorecard/v1/${collegeScoreCardSchoolName}${collegeScoreCardApiKey}`,
+          method: "GET"
+        }).then(function(response) {
+          // showResults(response)
+          // $("#SixYearIncome").html(`<b>Median income after six years: </b>$${respsone.results[0].latest.earnings..median}`)
+          console.log(response);
+          
+          // Saves search variables for firebase to capture when save button is clicked
+          
+          newCollege = `${response.results[0].school.name}`
+          newCity = `${response.results[0].school.city}`
+          newtuition_Instate = `${response.results[0].latest.cost.tuition.in_state}`
+          newtuition_Outstate = `${response.results[0].latest.cost.tuition.out_of_state}`
+          newacceptRate  = `${response.results[0].latest.admissions.admission_rate.overall}`
+          console.log(newCity);
+          newstate = `${response.results[0].school.state}`
+          var lat = response.results[0].location.lat
+          var long =  response.results[0].location.lon
+          collegeURL = `${response.results[0].school.school_url}`;
+          lowerCaseURL = collegeURL.toLowerCase();
+          console.log(long);
+          
+          return resolve({ lat, long, newCollege, newCity, newtuition_Instate, newtuition_Outstate, newacceptRate, newstate, collegeURL, lowerCaseURL });
+          
+        });
+      });
+    }
+    
+    function callCensusForPopulationAndJobs(data) {
+      return new Promise((resolve, reject) => {
+        $.ajax({
+          url: 'https://api.census.gov/data/2012/ewks?get=EMP,OPTAX&for=county:' + data.county + '&in=state:' + data.state + '&NAICS2012=54&key=dd80d72396b6e496fdf7a5ea00ee31be40962944',
+          method: "GET"
+        }).then(function (response) {
+          console.log(response)
+          var newPOP= `${response[1][0]}`
+          var newJobs = `${parseInt(response[1][0]) + parseInt(response[2][0]) + parseInt(response[3][0])}`
+          
+          data.newPOP = newPOP;
+          data.newJobs = newJobs;
+          return resolve(data);
+        });
+      });
+    }
+    
+    
+    function callCensusForHousing (data) {
+      return new Promise((resolve, reject) => {
+        $.ajax({
+          url: 'https://api.census.gov/data/2017/pep/housing?get=DATE,GEONAME,HUEST&for=county:' + data.county + '&in=state:' + data.state + '&key=dd80d72396b6e496fdf7a5ea00ee31be40962944',
+          method: "GET"
+        }).then(function (response) {
+          console.log(response)
+          var newHousing = `${response[1][2]}`
+          data.newHousing = newHousing;
+          return resolve(data);
+          // $("#housing").html(`<b>Housing: </b> ${response[1][2]}`);
+        });
+      });
+    }
+    
+    function callLOC (data) {
+      return new Promise((resolve, reject) => {
+        $.ajax({ 
+          url: 'https://tigerweb.geo.census.gov/ArcGIS/rest/services/Census2010/State_County/MapServer/1/query?text=&geometry={%22x%22:'+ data.long + ',%22y%22:'+ data.lat +',%22spatialReference%22:{%22wkid%22:4326}}&geometryType=esriGeometryPoint&spatialRel=esriSpatialRelIntersects&returnGeometry=false&outFields=STATE,COUNTY&f=json',
+          method: "GET"    
+        }).then(function(response) {
+          var state = response[273] + response[274]
+          var county = response[287] + response[288] + response[289]
+          console.log(response);
+          
+          data.state = state;
+          data.county = county;
+          return resolve(data);
+        });
+      });
+    }
+    
+    initialAPICall()
+    .then((data) => callLOC(data))
+    .then((data) => callCensusForPopulationAndJobs(data))
+    .then((data) => callCensusForHousing(data))
+    .then((data) => {
+      console.log('Manipulate the DOM here...');
+      console.log(data)
+      $("#collegeName").html(`<h1>${data.newCollege}</h1>`);
+      $("#collegeUrl").html(`<a href="https://${data.lowerCaseURL}" target="_blank">${data.lowerCaseURL}</a>`)
+      $("#location").html("<b>Location: </b>" + data.newCity +", "+ data.newstate);
+      $("#tuitionInstate").html("<b>In state cost: $</b>" + data.newtuition_Instate);
+      $("#tuitionOutstate").html("<b>Out of state cost: $</b>" + data.newtuition_Outstate);
+      $("#acceptanceRate").html("<b>Acceptance Rate: </b>" + data.newacceptRate + "%");
+      $("#population").html("<b>Population: </b>" + data.newPOP);
+      $("#jobs").html("<b>Total Jobs in Area: </b>" + data.newJobs);
+      $("#housing").html("<b>Housing: </b>" + data.newHousing);
+      showResults(data);
+      $("#cardResult").show();
+      
+    })
+    .catch(error => console.error(error));
+    
+    // JS for linking info to firebase
+      var config = {
+        apiKey: "AIzaSyCyWIXZHywteI0KWaauMi7sjWeyL_DDDcc",
+        authDomain: "college-finder-f2730.firebaseapp.com",
+        databaseURL: "https://college-finder-f2730.firebaseio.com",
+        projectId: "college-finder-f2730",
+        storageBucket: "college-finder-f2730.appspot.com",
+        messagingSenderId: "109608559117"
+        
+    };
+
+      firebase.initializeApp(config);
+      
+      var database = firebase.database();
+      
+      // Button that pushes var for firebase
+
+      function showResults(data) {
+        $("#add-college-btn").on("click", function(event) {
+            event.preventDefault();
+            console.log(newCity);
+
+            var newCollegeinfo = {
               
-            $("#collegeName").html(`<h1>${response.results[0].school.name}</h1>`);
-            $("#location").html(`<b>Location:</b> ${response.results[0].school.city}, ${response.results[0].school.state}`)
-            $("#tuitionInstate").html(`<b>In state cost:</b> $${response.results[0].latest.cost.tuition.in_state}`);
-            $("#tuitionOutstate").html(`<b>Out of state cost:</b> $${response.results[0].latest.cost.tuition.out_of_state}`);
-            $("#acceptanceRate").html(`<b>Acceptance Rate:</b> ${response.results[0].latest.admissions.admission_rate.overall}%`);
-            // $("#SixYearIncome").html(`<b>Median income after six years: </b>$${respsone.results[0].latest.earnings..median}`)
-            console.log(response);
-            console.log(`${response.results[0].school.city}`)
-          });
+              college: data.newCollege,
+              city: data.newCity + ", " + data.newstate,
+              tuition_Instate: data.newtuition_Instate,
+              tuition_Outstate: data.newtuition_Outstate,
+              acceptRate: data.newacceptRate,
+              POP: data.newPOP,
+              Housing: data.newHousing,
+              Jobs: data.newJobs
 
-    console.log("button works");
+              // income: newIncome,
+            };
+            
+            // push's new info to database
 
-});
-
-var config = {
-  apiKey: "AIzaSyCyWIXZHywteI0KWaauMi7sjWeyL_DDDcc",
-  authDomain: "college-finder-f2730.firebaseapp.com",
-  databaseURL: "https://college-finder-f2730.firebaseio.com",
-  projectId: "college-finder-f2730",
-  storageBucket: "college-finder-f2730.appspot.com",
-  messagingSenderId: "109608559117"
-
-};
-firebase.initializeApp(config);
-
-var database = firebase.database();
-
-// add new college info
-$("#add-college-btn").on("click", function(event) {
-  event.preventDefault();
-
-  // pulls user input/new college info
-  var newCollege = $("#collegeName").val().trim();
-  var newCity = $("#location").val().trim();
-  var newtuition_Instate = $("#tuitonInstate");
-  var newtuition_Outstate = $("#tuitionOutstate");
-  var newacceptRate = $("#acceptanceRate");
-
-  var newCollegeinfo = {
-
-      college: newCollege,
-      city: newCity,
-      tuition_Instate: newtuition_Instate,
-      tuition_Outstate: newtuition_Outstate,
-      acceptRate: newacceptRate,
-      // income: newIncome,
-  };
-
-  // push's new info to database
-  database.ref().push(newCollegeinfo);
-
-});
-
-
-database.ref().on("child_added", function(childSnapshot) {
-
-  var newCollege = childSnapshot.val().college;
-  var newCity = childSnapshot.val().city;
-  var newtuition_Instate = childSnapshot.val().tuition_Instate;
-  var newtuition_Outstate = childSnapshot.val().tuition_Outstate;
-  var newacceptRate = childSnapshot.val().acceptRate;
-  // var newIncome = childSnapshot.val().income;ß
-
-  // new row for college
-  var savedCollege= $("<tr>").append(
-
-      $("<td>").text(newCollege),
-      $("<td>").text(newCity),
-      $("<td>").text(newtuition_Instate),
-      $("<td>").text(newtuition_Outstate),        
-      $("<td>").text(newacceptRate),
-      // $("<td>").text(newIncome),
-
-  );
-
-  $("#collegeInfo-table > tbody").append(savedCollege);
-
+            database.ref().push(newCollegeinfo);
+        });
+      }
 });
