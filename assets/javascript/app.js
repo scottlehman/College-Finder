@@ -40,9 +40,11 @@ $("#submit-search").on("click", function(collegeINFO){
           newstate = `${response.results[0].school.state}`
           var lat = response.results[0].location.lat
           var long =  response.results[0].location.lon
+          collegeURL = `${response.results[0].school.school_url}`;
+          lowerCaseURL = collegeURL.toLowerCase();
           console.log(long);
           
-          return resolve({ lat, long, newCollege, newCity, newtuition_Instate, newtuition_Outstate, newacceptRate, newstate });
+          return resolve({ lat, long, newCollege, newCity, newtuition_Instate, newtuition_Outstate, newacceptRate, newstate, collegeURL, lowerCaseURL });
           
         });
       });
@@ -106,7 +108,8 @@ $("#submit-search").on("click", function(collegeINFO){
       console.log('Manipulate the DOM here...');
       console.log(data)
       $("#collegeName").html(`<h1>${data.newCollege}</h1>`);
-      $("#location").html("<b>Location: </b>" + data.newCity +", "+ data.newstate)
+      $("#collegeUrl").html(`<a href="${data.lowerCaseURL}">${data.lowerCaseURL}</a>`)
+      $("#location").html("<b>Location: </b>" + data.newCity +", "+ data.newstate);
       $("#tuitionInstate").html("<b>In state cost: $</b>" + data.newtuition_Instate);
       $("#tuitionOutstate").html("<b>Out of state cost: $</b>" + data.newtuition_Outstate);
       $("#acceptanceRate").html("<b>Acceptance Rate: </b>" + data.newacceptRate + "%");
