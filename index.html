@@ -6,10 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>College Finder</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Staatliches" rel="stylesheet">
+
     <!-- Firebase Reference -->
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
 
@@ -20,27 +22,26 @@
 
 <body>
     <div class="jumbotron jumbotron-fluid">
-            <h1 class="display-4">College Background Check</h1>
-            <p class="lead">Search into the specifics of the college of your choice</p>
-            <nav class="navbar navbar-expand-sm navbar-dark">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                      <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Saved Colleges</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </nav>
-        </div>
+        <br>
+        <h1 class="display-4">College Finder</h1>
+        <p class="lead">Search into the specifics of the college of your choice.</p>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarText" aria-controls="navbarText"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Search <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="favorites.html">Saved Colleges</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
     </div>
     <div class="container">
         <div class="row">
@@ -49,56 +50,52 @@
                     <h5 class="card-title">Saved Colleges</h5>
                     <img class="card-img-top" src="assets/css/apps-attractive-beautiful-1462631.jpg" alt="CollegeFinder">
                     <div class="card-body">
-                        <p class="card-text">Follow the links below to access your saved colleges.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+
                     </div>
                 </div>
             </div>
-             <br>
+            <br>
             <div class="col-lg-9">
                 <div class="card" id="style">
                     <form>
                         <div class="form-group">
-                            <h2><b>Find Your Future School</b></h2>
-                            <h5>Look up a college or univiersity you're interested in:</h5>
-                            <label for="exampleInputEmail1">Enter School Name</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                placeholder="">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Select Category</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>Cost of Attendance</option>
-                                    <option>Admission</option>
-                                    <option>After Graduation Earnings</option>
-                                    <option>Degrees</option>
-                                    <option>Local Economy</option>
-                                </select>
-                            </div>
+                            <h5>Search college of interest:</h5>
+                            <input type="text" class="form-control" id="college-name-input" aria-describedby="emailHelp"
+                                placeholder="Enter School Name">
                         </div>
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="submit" id="submit-search" class="btn btn-primary">Search</button>
                     </form>
                 </div>
                 <br>
-                <div class="card" style="width: 48rem;">
+                <div class="card" id="style">
                     <p id="collegeName"></p>
                     <p id="location"></p>
-                    <p id="tuitionInstate"></p>  
+                    <p id="tuitionInstate"></p>
                     <p id="tuitionOutstate"></p>
                     <p id="acceptanceRate"></p>
-                    <p id="SixYearIncome"></p>
-                    <button class="btn btn-primary float-right" id="add-college-btn">Save</button>
+                    <p id="population"></p>
+                    <p id="housing"></p>
+                    <p id="jobs"></p>
+                    <form action="">
+                        <button type="submit" id="submit-search" class="btn btn-primary">Save</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    
-<footer class="page-footer font-small blue">
-    <div class="footer-copyright text-center py-3">© 2019 Copyright: Cobra Coders
-    </div>
-  </footer>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <script src="assets/javascript/app.js"></script>
 
 </body>
+<footer class="footer font-small blue">
+    <div class="container">
+        <p class="footer-copyright text-center py-3">© 2019 Copyright: Cobra Coders</p>
+    </div>
+</footer>
 
 </html>
