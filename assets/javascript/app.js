@@ -33,9 +33,9 @@ $("#submit-search").on("click", function(collegeINFO){
           
           newCollege = response.results[0].school.name;
           newCity = response.results[0].school.city;
-          newtuition_Instate = response.results[0].latest.cost.tuition.in_state;
-          newtuition_Outstate = response.results[0].latest.cost.tuition.out_of_state;
-          newacceptRate  = response.results[0].latest.admissions.admission_rate.overall;
+          newtuition_Instate = numeral(response.results[0].latest.cost.tuition.in_state).format('$0,0.00');
+          newtuition_Outstate = numeral(response.results[0].latest.cost.tuition.out_of_state).format('$0,0.00');
+          newacceptRate  = numeral(response.results[0].latest.admissions.admission_rate.overall).format('0.00%');
           console.log(newCity);
           newstate = response.results[0].school.state;
           var lat = response.results[0].location.lat;
@@ -57,8 +57,8 @@ $("#submit-search").on("click", function(collegeINFO){
           method: "GET"
         }).then(function (response) {
           console.log(response)
-          var newPOP= response[1][0];
-          var newJobs = `${parseInt(response[1][0]) + parseInt(response[2][0]) + parseInt(response[3][0])}`
+          var newPOP= numeral(response[1][0]).format('0,0');
+          var newJobs = numeral(parseInt(response[1][0]) + parseInt(response[2][0]) + parseInt(response[3][0])).format('0,0');
           
           data.newPOP = newPOP;
           data.newJobs = newJobs;
@@ -75,7 +75,7 @@ $("#submit-search").on("click", function(collegeINFO){
           method: "GET"
         }).then(function (response) {
           console.log(response)
-          var newHousing = response[1][2];
+          var newHousing = numeral(response[1][2]).format('0,0');
           data.newHousing = newHousing;
           return resolve(data);
           // $("#housing").html(`<b>Housing: </b> ${response[1][2]}`);
@@ -110,9 +110,9 @@ $("#submit-search").on("click", function(collegeINFO){
       $("#collegeName").html(`<h1>${data.newCollege}</h1>`);
       $("#collegeUrl").html(`<a href="https://${data.lowerCaseURL}" target="_blank">${data.lowerCaseURL}</a>`)
       $("#location").html("<b>Location: </b>" + data.newCity +", "+ data.newstate);
-      $("#tuitionInstate").html("<b>In state cost: $</b>" + data.newtuition_Instate);
-      $("#tuitionOutstate").html("<b>Out of state cost: $</b>" + data.newtuition_Outstate);
-      $("#acceptanceRate").html("<b>Acceptance Rate: </b>" + data.newacceptRate + "%");
+      $("#tuitionInstate").html("<b>In state cost: </b>" + data.newtuition_Instate);
+      $("#tuitionOutstate").html("<b>Out of state cost: </b>" + data.newtuition_Outstate);
+      $("#acceptanceRate").html("<b>Acceptance Rate: </b>" + data.newacceptRate);
       $("#population").html("<b>Population: </b>" + data.newPOP);
       $("#jobs").html("<b>Total Jobs in Area: </b>" + data.newJobs);
       $("#housing").html("<b>Housing: </b>" + data.newHousing);
