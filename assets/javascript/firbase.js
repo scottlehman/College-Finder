@@ -28,9 +28,9 @@ database.ref().on("child_added", function(childSnapshot) {
         
         $("<td>").text(savedCollege),
         $("<td>").text(savedLocation),
-        $("<td>").text("$" + savedTuition_Instate),
-        $("<td>").text("$" + savedTuition_Outstate),        
-        $("<td>").text(savedAcceptRate + "%"),        
+        $("<td>").text(savedTuition_Instate),
+        $("<td>").text(savedTuition_Outstate),        
+        $("<td>").text(savedAcceptRate),        
         $("<td>").text(savedPOP),
         $("<td>").text(savedHousing),        
         $("<td>").text(savedJobs),
